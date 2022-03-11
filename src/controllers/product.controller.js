@@ -9,7 +9,7 @@ const getProducts = async (req,res) => {
       products
     })
   } catch(err) {
-    console.error(err);
+    return res.status(500).send({error: err})
   }
 }
 
@@ -21,7 +21,7 @@ const getProductById = async (req,res) => {
       product
     })
   } catch(err) {
-    console.error(err);
+    return res.status(500).send({error: err})
   }
 }
 
@@ -48,7 +48,7 @@ const createProduct = async (req,res) => {
       response
     })
   } catch(err) {
-    console.error(err);
+    return res.status(500).send({error: err})
   }
 }
 
@@ -60,21 +60,21 @@ const updateProduct = async (req,res) => {
       product
     })
   } catch(err) {
-    console.error(err);
+    return res.status(500).send({error: err})
   }
 }
 
 const removeProduct = async (req,res) => {
   try {
-    const { id } = req.params;
     const quantity = await Product.find().count();
     if(quantity <= 5)
-      return res.status(200).send('The registration minimum is five, you cannot delete more products.')
+    return res.status(500).send('The registration minimum is five, you cannot delete more products.')
 
-    await ProductSrv.removeProduct(id);
-    return res.status(200).send('Product deleted');
+    const { id } = req.params;
+    const response = await ProductSrv.removeProduct(id);
+    return res.status(200).send(response);
   } catch(err) {
-    console.error(err);
+    return res.status(500).send({error: err})
   }
 }
 
