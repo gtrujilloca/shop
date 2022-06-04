@@ -7,13 +7,10 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
     minlength: 10,
-    match: [/^(http(s?):)([\/|.|\w|\s|-])*\.(?:jpg|gif|png)/, 'URL must start with http:// or https:// and must end with .jpg, .gif or .png'],
+    match: [/^(http(s?):)([\/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/, 'URL must start with http:// or https:// and must end with .jpg, .gif or .png'],
   },
   price: { type: Number, required: true, min: 0 },
   lastUpdated: { type: Date, required: true },
 });
 
 module.exports = model('Product',ProductSchema);
-
-//^(http:\/\/|https:\/\/)+[a-zA-Z0-9\-\.]+|([\/|.|\w|\s])
-//^(http(s?):)|([\/|.|\w|\s])*\.(?:jpg|gif|png)
