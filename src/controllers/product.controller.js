@@ -5,9 +5,9 @@ const getProducts = async (req,res) => {
   try {
     const { limit = 0 } = req.query;
     const products = await ProductSrv.getProducts(limit);
-    return res.status(200).send({
+    return res.status(200).send(
       products
-    })
+    )
   } catch(err) {
     return res.status(500).send({error: err})
   }
@@ -17,9 +17,9 @@ const getProductById = async (req,res) => {
   try {
     const { id } = req.params;
     const product = await ProductSrv.getProductById(id);
-    return res.status(200).send({
+    return res.status(200).send(
       product
-    })
+    )
   } catch(err) {
     return res.status(500).send({error: err})
   }
@@ -56,9 +56,9 @@ const updateProduct = async (req,res) => {
   try {
     const { id } = req.params;
     const product = await ProductSrv.updateProduct(id, req.body);
-    return res.status(200).send({
+    return res.status(200).send(
       product
-    })
+    )
   } catch(err) {
     return res.status(500).send({error: err})
   }
