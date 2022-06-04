@@ -38,7 +38,8 @@ const createProduct = async (req,res) => {
       name,
       description,
       imageUrl,
-      price
+      price,
+      lastUpdated: new Date(),
     })
     const quantity = await Product.find().count();
     if(quantity > 100)
@@ -55,7 +56,8 @@ const createProduct = async (req,res) => {
 const updateProduct = async (req,res) => {
   try {
     const { id } = req.params;
-    const product = await ProductSrv.updateProduct(id, req.body);
+    const updatedProduct = {...req.body, lastUpdated: new Date()};
+    const product = await ProductSrv.updateProduct(id, updatedProduct);
     return res.status(200).send(
       product
     )
